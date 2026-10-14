@@ -1,54 +1,38 @@
-stack = []
+def push(stack, item, capacity):
+    """Agrega un elemento si la pila tiene espacio."""
+    if len(stack) >= capacity:
+        return False
 
-def push(item, capacity):
-    if not is_full(capacity):   
-        stack.append(item)
-        return "Elemnto apilado...."
-    return "pila llena"
+    stack.append(item)
+    return True
 
-def isEmpty():
-    return not len(stack)
 
-def is_full(capacity):
-    return len(stack) == capacity
+def is_empty(stack):
+    """Comprueba si la pila está vacía."""
+    return len(stack) == 0
 
-def peek():
-    if not isEmpty():
-        return stack[-1]
-    return "pila vacia...." 
 
-def pop():
-    if not isEmpty():
-        return stack.pop()
-    return "Pila Vacia"
+def is_full(stack, capacity):
+    """Comprueba si se alcanzó la capacidad máxima."""
+    return len(stack) >= capacity
 
-def show():
-    message = ""
-    for item in reversed(stack):
-        message += f"|{item :>6}|\n"
-        message += f"L" + "-"*8 + "L\n"
-    return message
 
-capacity = int (input("Dime el tamaño de la pila: ")) 
-while True:
-    item  = input("Dime un valor: ")
-    print(push (item, capacity))
-    answer = input("Deseas agregar otro dato: [S/N]: ")
-    if answer.lower() == "n":
-        break
+def peek(stack):
+    """Devuelve el elemento del tope sin eliminarlo."""
+    if is_empty(stack):
+        return None
 
-print("Mostrar tope")
-print(peek())
-print(peek())
+    return stack[-1]
 
-print(show())
 
-print("Desapilar")
-while True:
-    answer = input("Deseas desapilar [S/N]: ")
-    if answer.lower() == "s":
-        print(pop())
-    elif answer.lower() == "n":
-        break
-    else:
-        print("OPCION INVALIDA..........")
+def pop(stack):
+    """Elimina y devuelve el elemento del tope."""
+    if is_empty(stack):
+        return None
+
+    return stack.pop()
+
+
+def show(stack):
+    """Devuelve los elementos del tope al fondo."""
+    return list(reversed(stack))
